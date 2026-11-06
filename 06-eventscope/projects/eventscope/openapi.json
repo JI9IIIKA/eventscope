@@ -1,0 +1,273 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "EventScope",
+    "version": "0.1.0",
+    "description": "Продуктовая аналитика; request examples and route contract. Exact required fields and invariants are validated by Go handlers."
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8085"
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    }
+  },
+  "paths": {
+    "/events": {
+      "post": {
+        "operationId": "eventscope_post_events",
+        "summary": "POST /events",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "maxLength": 128
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Invalid request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not found or transition not applicable"
+          },
+          "409": {
+            "description": "Conflict"
+          },
+          "413": {
+            "description": "Body exceeds 1 MiB"
+          },
+          "429": {
+            "description": "Rate limit"
+          },
+          "500": {
+            "description": "Internal error"
+          },
+          "503": {
+            "description": "Dependency unavailable"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "events": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        },
+                        "user_id": {
+                          "type": "string"
+                        },
+                        "name": {
+                          "type": "string"
+                        },
+                        "occurred_at": {
+                          "type": "string"
+                        },
+                        "properties": {
+                          "type": "object",
+                          "properties": {}
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "example": {
+                "events": [
+                  {
+                    "id": "event-1",
+                    "user_id": "alice",
+                    "name": "view",
+                    "occurred_at": "2026-01-01T10:00:00Z",
+                    "properties": {}
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/analytics/daily": {
+      "get": {
+        "operationId": "eventscope_get_analytics_daily",
+        "summary": "GET /analytics/daily",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Invalid request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not found or transition not applicable"
+          },
+          "409": {
+            "description": "Conflict"
+          },
+          "413": {
+            "description": "Body exceeds 1 MiB"
+          },
+          "429": {
+            "description": "Rate limit"
+          },
+          "500": {
+            "description": "Internal error"
+          },
+          "503": {
+            "description": "Dependency unavailable"
+          }
+        }
+      }
+    },
+    "/analytics/funnel": {
+      "get": {
+        "operationId": "eventscope_get_analytics_funnel",
+        "summary": "GET /analytics/funnel",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "first",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "second",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Invalid request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not found or transition not applicable"
+          },
+          "409": {
+            "description": "Conflict"
+          },
+          "413": {
+            "description": "Body exceeds 1 MiB"
+          },
+          "429": {
+            "description": "Rate limit"
+          },
+          "500": {
+            "description": "Internal error"
+          },
+          "503": {
+            "description": "Dependency unavailable"
+          }
+        }
+      }
+    },
+    "/analytics/retention": {
+      "get": {
+        "operationId": "eventscope_get_analytics_retention",
+        "summary": "GET /analytics/retention",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Invalid request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not found or transition not applicable"
+          },
+          "409": {
+            "description": "Conflict"
+          },
+          "413": {
+            "description": "Body exceeds 1 MiB"
+          },
+          "429": {
+            "description": "Rate limit"
+          },
+          "500": {
+            "description": "Internal error"
+          },
+          "503": {
+            "description": "Dependency unavailable"
+          }
+        }
+      }
+    }
+  }
+}

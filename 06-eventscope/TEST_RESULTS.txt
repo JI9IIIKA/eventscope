@@ -1,0 +1,6 @@
+Standalone module: build PASS; vet PASS; unit tests PASS.
+API/SQL on PGlite, single connection:
+=== RUN   TestEventScope
+--- PASS: TestEventScope (0.02s)
+PASS
+ok  	eventscope/tests	0.025s
